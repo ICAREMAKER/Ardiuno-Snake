@@ -1,6 +1,6 @@
 # ARDUINO SNAKE ![arduinoThumb](https://github.com/ICAREMAKER/Arduino---Fonts/assets/107696317/1e80c0a0-27bd-4b96-a6e1-88ef7eca9098) ![C++-Logo wine](https://github.com/ICAREMAKER/Arduino---Fonts/assets/107696317/882aa901-1f05-43d5-9574-60db4e7b6537)
 
-<img width="2160" height="1622" alt="Snake-Game-Circuit" src="https://github.com/user-attachments/assets/e3363b9e-4e53-400f-9cfb-bb13ceb599da" />
+<img width="500" height="400" alt="Snake-Game-Circuit" src="https://github.com/user-attachments/assets/e3363b9e-4e53-400f-9cfb-bb13ceb599da" />
 
 
 ## Importation des librairies
