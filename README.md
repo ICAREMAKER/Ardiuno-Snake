@@ -1,3 +1,11 @@
+# ARDUINO SNAKE ![arduinoThumb](https://github.com/ICAREMAKER/Arduino---Fonts/assets/107696317/1e80c0a0-27bd-4b96-a6e1-88ef7eca9098) ![C++-Logo wine](https://github.com/ICAREMAKER/Arduino---Fonts/assets/107696317/882aa901-1f05-43d5-9574-60db4e7b6537)
+
+![Qb](https://github.com/ICAREMAKER/Arduino-Pattern-8servos/assets/107696317/3b96b3af-cc64-48fe-a2df-3e50cb406b34)
+
+
+## Importation des librairies
+
+```C
 #include <MD_MAX72xx.h>
 #include <SPI.h>
 
@@ -7,12 +15,15 @@
 #define CS_PIN 10
 
 MD_MAX72XX mx = MD_MAX72XX(MD_MAX72XX::FC16_HW, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
-
+```
+```C
 // Joystick
 #define VRX A0
 #define VRY A1
 #define SW 2
-
+```
+## Parametrage par défaut: écran,serpent, position joystick, item
+```C
 // Jeu Snake
 int snakeX[64];
 int snakeY[64];
@@ -22,7 +33,9 @@ int foodX, foodY;
 
 unsigned long lastMove = 0;
 int speedDelay = 750; // Vitesse du jeu en ms
-
+```
+## Valeurs de démarrage
+```C
 void setup() {
   mx.begin();
   pinMode(SW, INPUT_PULLUP);
@@ -31,7 +44,9 @@ void setup() {
   resetSnake();
   spawnFood();
 }
-
+```
+## La boucle est 'temporisée'
+```C
 void loop() {
   readJoystick();
 //J'integre le jeu dans une boucle temporelle que je personnalise
@@ -42,30 +57,30 @@ void loop() {
     lastMove = millis();
   }
 }
+```
 
 
 
-
-
-
+## La structure générale du jeu
+```C
 // ======================
 // Gestion du jeu
 // ======================
 
 
-
+//===========================
 //A mettre dans le SETUP!!!!!
 //===========================
 
 void resetSnake() {
   snakeLength = 3; //Le serpent mesure 3 pixels au démarage
-  snakeX[0] = 3;  //Sa position dans l'écran de jeu au démarage
-  snakeY[0] = 4;
+  snakeX[0] = 3;  //La position X de la tete dans l'écran de jeu au démarage
+  snakeY[0] = 4;  //La position Y de la tete dans l'écran de jeu au démarage
   snakeX[1] = 2;
   snakeY[1] = 4;
   snakeX[2] = 1;
   snakeY[2] = 4;
-  dir = 1; // droite
+  dir = 1;        // vers la droite par defaut
 }
 //Je positionne au hasard un sucre sur l'écran
 void spawnFood() {
@@ -73,6 +88,8 @@ void spawnFood() {
   foodY = random(0, 8);
 }
 
+//A mettre dans la BOUCLE!!!!!
+//===========================
 void moveSnake() {
   int prevX = snakeX[0];
   int prevY = snakeY[0];
@@ -124,16 +141,9 @@ void drawSnake() {
     mx.setPoint(snakeY[i], snakeX[i], true);
   }
 
-  // Nourriture
+  // Dessiner item
   mx.setPoint(foodY, foodX, true);
 }
-
-
-
-
-
-
-
 
 
 // ======================
@@ -144,8 +154,9 @@ void readJoystick() {
   int xValue = analogRead(VRX);
   int yValue = analogRead(VRY);
 
-  if (xValue < 400 && dir != 1) dir = 0; // gauche
+  if (xValue < 400 && dir != 1) dir = 0;      // gauche
   else if (xValue > 600 && dir != 0) dir = 1; // droite
   else if (yValue < 400 && dir != 3) dir = 3; // haut
   else if (yValue > 600 && dir != 2) dir = 2; // bas
 }
+```
